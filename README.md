@@ -35,6 +35,8 @@ This is the second keyer release, and the Arduino Nano board has been replaced b
 
 The user interface is quite simple. A short press on the rotary button changes between menu entries and the rotary action changes the value of the selected menu. There are two sets of menus: The most often used and the less often used.
 
+![Menu layout](images/menu.jpg)
+
 The first set of menus contains the most used options:
 
 __Speed__: The CW speed, using the PARIS method, where the dot length is calculated, in milliseconds, as 1200 divided by the desired speed.
