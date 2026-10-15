@@ -1,5 +1,6 @@
 # KA-Keyer
 ## A simple keyer for the high speed CW operators
+## Current version: 2.3
 
 ![KA-Keyer](images/ka-keyer.jpg)
 
