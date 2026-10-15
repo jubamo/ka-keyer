@@ -21,15 +21,11 @@ This is the second keyer release, and the Arduino Nano board has been replaced b
 
 - Partial compatibility with WinKeyer, tested with N1MM, Fldigi, Rumlog...
 
-- USB-C connector
-
-## New in version 2.2
-
 - EEPROM leveling, to prevent premature EEPROM wearing.
 
 - On screen CW decoder, useful to practice yourself and check your manipulation.
 
-- General code optimizations and rewrite in a more C-like way.
+- USB-C connector
 
 ## Usage
 
@@ -83,6 +79,10 @@ Remember to put in back the jumper at the rear of the keyer after flashing it to
 
 Many programs can't use the keyer without the jumper because it resets itself everytime the program opens the serial port (the jumper prevent this). If this is happening, you will hear a __K__ everytime the program is trying to connect with the keyer because it is resetting itself.
 
+## Flashing the Waveshare RP2040 Zero board with precompiled firmware
+
+If you do not want to compile the firmware yourself you can use the provided __ka-keyer.ino.uf2__ file. Just press the Boot button on the board and while pressing it connect the board to your computer. Then release the button. The board will appear on your computer as a USB pendrive. Just copy the __ka-keyer.ino.uf2__ into it. After a few moments the board will unmount itself and the flashing procedure will be complete.
+
 ## Compiling and flashing for the Waveshare RP2040 Zero based KA-Keyer
 
 First, make sure you have configured support for the RP2040 microcontroller in Arduino IDE.
@@ -91,9 +91,7 @@ Go to Menu ---> Preferences, and make sure you have the following URL added in t
 
 https://github.com/earlephilhower/arduino-pico/releases/download/global/package_rp2040_index.json
 
-If not, after adding it the Arduino IDE will download all the required files to support the RP2040 microntroller.
-
-Once the support for the RP2040 is installed, use your favorite text editor and edit this file:
+Once the line is added, go to the Boards Manager and install the one named __Raspberry Pi Pico/RP2040/RP2350 by Earle F. Philhower, III__. Once the support for the RP2040 is installed, use your favorite text editor and edit this file:
 
 .arduino15/packages/rp2040/hardware/rp2040/[VERSION]/cores/rp2040/SerialUSB.cpp
 
@@ -106,7 +104,7 @@ C:\Users\{username}\AppData\Local\Arduino15\packages/rp2040/hardware/rp2040/[VER
 Once you have open the SerialUSB.cpp file in your editor look for the CheckSerialReset() function and empty it, for example:
 
     static void CheckSerialReset() {
-        if (!_rebooting && (_bps == 1200) && (!_dtr)) {
+    //  if (!_rebooting && (_bps == 1200) && (!_dtr)) {
     //      if (__isFreeRTOS) {
     //          __freertos_idle_other_core();
     //      }
@@ -120,7 +118,7 @@ Once you have open the SerialUSB.cpp file in your editor look for the CheckSeria
     //      busy_wait_ms(3);
     //      reset_usb_boot(0, 0);
     //      while (1); // WDT will fire here
-        }
+    //  }
     }
 
 This is needed because the Waveshare RP2040 Zero, and many other boards with native USB support uses opening the serial port at 1200 bauds to reset and launch the bootloader. Any program supporting Winkeyer will open the serial port at 1200 bauds, so the board will reset and enters in the flashing mode, preventing the usage as a CW keyer.

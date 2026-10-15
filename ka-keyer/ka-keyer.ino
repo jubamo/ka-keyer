@@ -28,7 +28,7 @@
 #define KEYER_OUTPUT 11
 #define PTT_OUTPUT 12
 #define BUZZER_OUTPUT 4
-#define KAKEYER_VERSION (F("V 2.2 Nano"))
+#define KAKEYER_VERSION (F("V 2.3 Nano"))
 #endif
 
 #ifdef ARDUINO_WAVESHARE_RP2040_ZERO
@@ -44,7 +44,7 @@
 #define EEPROM_SCL 1
 #define OLED_SDA 2
 #define OLED_SCL 3
-#define KAKEYER_VERSION (F("V 2.2 Pico"))
+#define KAKEYER_VERSION (F("V 2.3 Pico"))
 #endif
 
 void setup() {
